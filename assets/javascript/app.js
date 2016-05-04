@@ -70,12 +70,13 @@ var submit = true;
 
 
 $(document).ready(function(event){
-	$('#start').on('click', function(){
-			
-		});
-	$('#submit').append('<button' + submit + '>').hide();
+	$('#start').on('click', startTimer.start()){
+			$('refresh').empty;
+			$('refresh').append
+		};
+	$('#submit').append('<button' + submit + '>').hide;
 	
-	var refresh = (function(event){
+	function refresh (event){
 		correctA = 0;
 		incorrect = 0;
 		unanswered = 0;
@@ -83,49 +84,106 @@ $(document).ready(function(event){
 			
 		});
 
-	});
+	};
 
-	 	var answers = $('#answers');
+ 	var answers = $('#answers');
 
-     	for (var i = 0; i < quiz.length; i++) {
-	      answers.append('<h2>' + quiz[i].question + '</h2>');
-      	for (var j = 0; j < quiz[i].choices.length; j++) {
-	        answers.append('<button value="' +	 quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + quiz[i].correct[k] + '">' + quiz[i].choices[j]);
-      	}for (var k = 0; k < quiz[i].correct.length; k++){}
-     
-	    }});
+ 	for (var i = 0; i < quiz.length; i++) {
+      answers.append('<h2>' + quiz[i].question + '</h2>');
+  	for (var j = 0; j < quiz[i].choices.length; j++) {
+        answers.append('<button value="' +	 quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + '" data-choice="' + quiz[i].correct[k] + '">' + quiz[i].choices[j]);
+  	}for (var k = 0; k < quiz[i].correct.length; k++){}
+ 
+    }});
 
 
     $('button').on('click', function(e){
     	var clickedButton = $(this).data('choice');
-    	 	// for (var k = 0; k < quiz.correct.length; k++){
+    	 	for (var k = 0; k < quiz[i].correct.length; k++){
 	      	if (clickedButton == quiz[i].correct[k]){
     		return correctA ++;
     		alert("You chose correctly!");
-    		// correctA++;
-    	// }
-    }});
+    }}});
 
-    
-	setTimeout(timer, 1000 * 30);
     	
-    	var timer = function(){
-    		  $('#time-left').html('<h2> </h2>');
-  				alert('30 seconds left');
-}
-    	
-    // 	for (var k = 0; k < quiz[i].correct.length; k++){
-    // 		if (clickedButton == quiz[i].correct[k]){
-    // 		return true;
-    		// alert("You chose correctly!");
-    		// correctA++;
-    	// } else{
-    	// 	return false;
-    		// incorrect ++;
-    	// }
-    	// }
-    	// });
+	function startTimer(duration,display){
+		var time = 0;
+		$('#time-left').html('00:00');
+		function start(){
+			counter = setInterval(startTimer.count, 1000);
+  	}
+	  	function stop(){
+	    	clearInterval(counter);
+	  }
+	  	function count(){
+		  time++;
+		  var converted = timeConverter(time);
+		  $('#display').html(converted);
+	}
 
+	function timeConverter(t){
+	  var minutes = Math.floor(t/60);
+	  var seconds = t - (minutes * 60);
+	  if (seconds < 10){
+	    seconds = "0" + seconds;
+	  }
+	  if (minutes === 0){
+	    minutes = "00";
+	  } else if (minutes < 10){
+	    minutes = "0" + minutes;
+	  }
+	  return minutes + ":" + seconds;
+	}};
+// 	function timeConverter{
+// 		var timer = duration, seconds;
+// 	    setInterval(function () {
+// 	        seconds = parseInt(timer % 1000, 30);
+
+// 	        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+// 	        display.text = seconds;
+
+// 	        if (--timer < 0) {
+// 	            timer = duration;
+// 	        }
+// 	    }, 1000;
+// 	}
+// }
+// 	(function () {
+// 	    var thirtySeconds = 1000 * 30,
+// 	        display = $('#time-left');
+// 	    startTimer(thirtySeconds, display);
+// 	});
+
+// 	var timeoutID;
+
+// 	function delayedAlert() {
+// 	  timeoutID = window.setTimeout(thirtySeconds, 30000);
+// 	}
+
+// 	function clearAlert() {
+// 	  window.clearTimeout(timeoutID);
+// 	}
+
+//   time:0,
+//   lap:1,
+//   reset: function(){
+//     stopwatch.time = 0;
+//     stopwatch.lap = 1;
+//     $('#display').html('00:00');
+//     $('#laps').html('');
+//   },
+//   start: function(){
+//     counter = setInterval(stopwatch.count, 1000);
+//   },
+//   stop: function(){
+//     clearInterval(counter);
+//   }
+//   function count(){
+// 	  time++;
+// 	  var converted = timeConverter(time);
+// 	  $('#display').html(converted);
+// }
     // function processA(){
     // 	$('.choices').on('click', function(currentTarget){
     // 		correct = Number(correct) + Number($(this).val());
@@ -150,23 +208,4 @@ $(document).ready(function(event){
  //    function nextQuestion(){
  //    	submit = true;
 	// 	$('#questions').text(quiz[currentquestion]["question"]);
-	// }; 
-
-	// console.log ('quizQ');
-	  // function addChoices(choices) {
-	  // 	for (var i = 0; i < quiz.choices.length;i ++){
-	  // 		var b = $('<button>');
-		 //  	 	b.addClass('btn btn-choices');
-			//     b.attr('data-let', quiz.choices[i]);
-			//     b.text(quiz.choices[i]);
-
-   //    	 	$('#answers').append(b);
-   //   		}
-   //   	};
-         
-
-
-	
-
-// 	$(document.createElement('h2')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#questions');
- 
+	// };  
