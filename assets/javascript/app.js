@@ -101,6 +101,7 @@ $(document).ready(function(event){
 	
 	function refresh (event){
 		correctA = 0;
+			for (l = 0; l < correctA; l ++)
 		incorrect = 0;
 		unanswered = 0;
 		$('#start').on('click', function(){
