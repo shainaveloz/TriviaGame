@@ -62,9 +62,9 @@ var quiz = [
 
 var currentquestion = 0;
 var currentChoice;
-var correct = $('#quiz.correct');
+
 var correctA = 0;
-var incorrect = 0;
+var incorrect;
 var unanswered = 0;
 var submit = true;
 
@@ -89,10 +89,42 @@ $(document).ready(function(event){
 
      	for (var i = 0; i < quiz.length; i++) {
 	      answers.append('<h2>' + quiz[i].question + '</h2>');
-	      for (var j = 0; j < quiz[i].choices.length; j++) {
-	        answers.append('<button value="' + quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + '">' + quiz[i].choices[j]);
-	      }
-	    }
+      	for (var j = 0; j < quiz[i].choices.length; j++) {
+	        answers.append('<button value="' +	 quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + quiz[i].correct[k] + '">' + quiz[i].choices[j]);
+      	}for (var k = 0; k < quiz[i].correct.length; k++){}
+     
+	    }});
+
+
+    $('button').on('click', function(e){
+    	var clickedButton = $(this).data('choice');
+    	 	// for (var k = 0; k < quiz.correct.length; k++){
+	      	if (clickedButton == quiz[i].correct[k]){
+    		return correctA ++;
+    		alert("You chose correctly!");
+    		// correctA++;
+    	// }
+    }});
+
+    
+	setTimeout(timer, 1000 * 30);
+    	
+    	var timer = function(){
+    		  $('#time-left').html('<h2> </h2>');
+  				alert('30 seconds left');
+}
+    	
+    // 	for (var k = 0; k < quiz[i].correct.length; k++){
+    // 		if (clickedButton == quiz[i].correct[k]){
+    // 		return true;
+    		// alert("You chose correctly!");
+    		// correctA++;
+    	// } else{
+    	// 	return false;
+    		// incorrect ++;
+    	// }
+    	// }
+    	// });
 
     // function processA(){
     // 	$('.choices').on('click', function(currentTarget){
@@ -112,40 +144,14 @@ $(document).ready(function(event){
     // 			console.log('correctA');
     // 		}
     // 	})
+// var correct = $('#quiz.correct');
 
-
-    $('button').on('click', function(e){
-    	var clickedButton = $(this).data('choice');
-    	for (var k = 0; k < quiz[i].correct; k++){
-    		if (clickedButton == quiz[i].correct[k]){
-    		return true;
-    		alert("You chose correctly!");
-    		correctA++;
-    	} else(clickedButton !== quiz.correct[k])
-    		return false;
-    		incorrect ++;
-    	};
-    	})
-    	// alert(clickedButton);
-    	// if (clickedButton == quiz[i].correct[k]){
-    	// 	return true;
-    	// 	alert("You chose correctly!");
-    	// 	correct++;
-    	// } else(clickedButton !== quiz.correct[k])
-    	// 	return false;
-    	// 	incorrect ++;
-    	// });
-	});
 	    
-    function nextQuestion(){
-    	submit = true;
-		$('#questions').text(quiz[currentquestion]["question"]);
-	};     
+ //    function nextQuestion(){
+ //    	submit = true;
+	// 	$('#questions').text(quiz[currentquestion]["question"]);
+	// }; 
 
-	// var quizQ = (function(){
-	// 	Math.floor(Math.random() * quiz.question.length);
-	// 	for (i = 0; i < quiz.question.length; i++);
-	// });
 	// console.log ('quizQ');
 	  // function addChoices(choices) {
 	  // 	for (var i = 0; i < quiz.choices.length;i ++){
@@ -159,16 +165,8 @@ $(document).ready(function(event){
    //   	};
          
 
-		
-         // if (typeof choices !== "undefined" && $.type(choices) == "array") {
-         //     $('#answers').empty();
-         //     for (var i = 0; i < quiz.choices.length; i++) {
-         //         $(document.createElement('button')).addClass('btn btn-choices').attr('#quiz.choices', i).text(quiz.choices[i]).appendTo('#answers');
-         //         $('#choices').text(quiz[currentChoices]["choices"]);
-             // }
-      
-//      };
+
 	
 
 // 	$(document.createElement('h2')).addClass('question').attr('id', 'question').text(quiz[0]['question']).appendTo('#questions');
- ;
+ 
