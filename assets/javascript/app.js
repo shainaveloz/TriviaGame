@@ -60,20 +60,43 @@ var quiz = [
 	"correct" : "COPERNICUS"
 }];
 
-var currentquestion = 0;
 var currentChoice;
-
 var correctA = 0;
 var incorrect;
 var unanswered = 0;
 var submit = true;
 
 
+
 $(document).ready(function(event){
-	$('#start').on('click', startTimer.start()){
+
+ 	var answers = $('#answers');
+
+	 	for (var i = 0; i < quiz.length; i++) {
+	      answers.append('<h2>' + quiz[i].question + '</h2>');
+	  	for (var j = 0; j < quiz[i].choices.length; j++) {
+	        answers.append('<button value="' +	 quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + '" data-choice="' + quiz[i].correct[k] + '">' + quiz[i].choices[j]);
+	  	}for (var k = 0; k < quiz[i].correct.length; k++){}
+	 
+	    }});
+
+
+  
+    $('button').on('click', function(e){
+    	var clickedButton = $(this).data('choice');
+    		for (var i = 0; i < quiz.length; i++){
+    	 	for (var k = 0; k < quiz[i].correct.length; k++){
+	      	if (clickedButton == quiz[i].correct[k]){
+    		return correctA ++;
+    		alert("You chose correctly!");
+    }}}});
+
+
+	$('#start').on('click', function(){
+			startTimer();
 			$('refresh').empty;
-			$('refresh').append
-		};
+			$('refresh').append('#answers');
+		});
 	$('#submit').append('<button' + submit + '>').hide;
 	
 	function refresh (event){
@@ -83,34 +106,16 @@ $(document).ready(function(event){
 		$('#start').on('click', function(){
 			
 		});
+		$('answers').empty();
+		$('answers').append(nextQuestion);
 
-	};
-
- 	var answers = $('#answers');
-
- 	for (var i = 0; i < quiz.length; i++) {
-      answers.append('<h2>' + quiz[i].question + '</h2>');
-  	for (var j = 0; j < quiz[i].choices.length; j++) {
-        answers.append('<button value="' +	 quiz[i].choices[j] + '" data-choice="' + quiz[i].choices[j] + '" data-choice="' + quiz[i].correct[k] + '">' + quiz[i].choices[j]);
-  	}for (var k = 0; k < quiz[i].correct.length; k++){}
- 
-    }});
-
-
-    $('button').on('click', function(e){
-    	var clickedButton = $(this).data('choice');
-    	 	for (var k = 0; k < quiz[i].correct.length; k++){
-	      	if (clickedButton == quiz[i].correct[k]){
-    		return correctA ++;
-    		alert("You chose correctly!");
-    }}});
-
+	}
     	
 	function startTimer(duration,display){
 		var time = 0;
 		$('#time-left').html('00:00');
 		function start(){
-			counter = setInterval(startTimer.count, 1000);
+			counter = setInterval(startTimer.count, 1000 * 30);
   	}
 	  	function stop(){
 	    	clearInterval(counter);
@@ -133,79 +138,11 @@ $(document).ready(function(event){
 	    minutes = "0" + minutes;
 	  }
 	  return minutes + ":" + seconds;
-	}};
-// 	function timeConverter{
-// 		var timer = duration, seconds;
-// 	    setInterval(function () {
-// 	        seconds = parseInt(timer % 1000, 30);
+	}}
 
-// 	        seconds = seconds < 10 ? "0" + seconds : seconds;
+	function nextQuestion(){
+    	$('#startTimer').replaceWith('#answers');
+	};  
 
-// 	        display.text = seconds;
 
-// 	        if (--timer < 0) {
-// 	            timer = duration;
-// 	        }
-// 	    }, 1000;
-// 	}
-// }
-// 	(function () {
-// 	    var thirtySeconds = 1000 * 30,
-// 	        display = $('#time-left');
-// 	    startTimer(thirtySeconds, display);
-// 	});
-
-// 	var timeoutID;
-
-// 	function delayedAlert() {
-// 	  timeoutID = window.setTimeout(thirtySeconds, 30000);
-// 	}
-
-// 	function clearAlert() {
-// 	  window.clearTimeout(timeoutID);
-// 	}
-
-//   time:0,
-//   lap:1,
-//   reset: function(){
-//     stopwatch.time = 0;
-//     stopwatch.lap = 1;
-//     $('#display').html('00:00');
-//     $('#laps').html('');
-//   },
-//   start: function(){
-//     counter = setInterval(stopwatch.count, 1000);
-//   },
-//   stop: function(){
-//     clearInterval(counter);
-//   }
-//   function count(){
-// 	  time++;
-// 	  var converted = timeConverter(time);
-// 	  $('#display').html(converted);
-// }
-    // function processA(){
-    // 	$('.choices').on('click', function(currentTarget){
-    // 		correct = Number(correct) + Number($(this).val());
-    // 		incorrect = Number(incorrect) + Number($(this).val());
-    // 		if (currentChoice == correct) {
-    // 			correctA ++;
-    // 			console.log('correctA');
-    // 		}
-    // 	})
-    // }
-    // $('button').on('click', function(currentTarget){
-    // 		correct = Number(correct) + Number($(this).val());
-    // 		incorrect = Number(incorrect) + Number($(this).val());
-    // 		if (currentChoice == correct) {
-    // 			correctA ++;
-    // 			console.log('correctA');
-    // 		}
-    // 	})
-// var correct = $('#quiz.correct');
-
-	    
- //    function nextQuestion(){
- //    	submit = true;
-	// 	$('#questions').text(quiz[currentquestion]["question"]);
-	// };  
+ //    
